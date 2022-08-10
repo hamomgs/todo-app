@@ -22,13 +22,11 @@ export default class Main extends Component {
   }
   
   // atualizar dados do local storage
-  componentDidUpdate() {
+  componentDidUpdate(_, prevState) {
     const { taskList, order } = this.state;
-    const taskListStorage = localStorage.getItem('taskList')
-    const orderStorage = localStorage.getItem('order')
   
-    // se dados do local storage forem difrente dos dados do state, então atualizar
-    if (taskListStorage !== taskList || orderStorage !== order) {
+    // se dados do state anterior forem difrentes dos dados do state atual, então atualizar localStorage
+    if (prevState !== taskList || prevState !== order) {
       localStorage.setItem('taskList', JSON.stringify(taskList))
       localStorage.setItem('order', JSON.stringify(order))
     }
