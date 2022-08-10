@@ -63,5 +63,3 @@ export const ToDoItem = ({
     </S.TaskContainer>
   )
 }
-
-// export default ToDoItem

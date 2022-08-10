@@ -174,7 +174,7 @@ export const ChangeOrder = styled.i`
 
 export const TaskList = styled.div`
   display: flex;
-  flex-direction: ${({ order }) => order};
+  flex-direction: ${({ order }) => order || 'column'};
   gap: 15px;
   width: 100%;
   max-width: 540px;

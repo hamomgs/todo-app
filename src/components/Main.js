@@ -5,45 +5,40 @@ import { ToDoItem } from './ToDoItem.js'
 export default class Main extends Component {
   state = {
     task: '',
-    taskList:
-      localStorage.getItem('taskList') !== null
-        ? JSON.parse(localStorage.getItem('taskList'))
-        : [
-            {
-              task: 'Passear com o dog',
-              id: 9181829373,
-              completed: false
-            },
-            {
-              task: 'Levar o lixo',
-              id: 1746848554,
-              completed: true
-            },
-            {
-              task: 'Tomar banho',
-              id: 68468434554,
-              completed: true
-            },
-            {
-              task: 'Ler livro',
-              id: 2368423554,
-              completed: false
-            }
-          ],
-    order: localStorage.getItem('order') !== null ? JSON.parse(localStorage.getItem('order')) : 'column',
+    taskList: [],
+    order: '',
     edit: '',
     draggable: true
   }
 
-  updateLocalStorage = () => {
-    localStorage.setItem('taskList', JSON.stringify(this.state.taskList))
-    localStorage.setItem('order', JSON.stringify(this.state.order))
+  // pegar dados do local storage
+  componentDidMount() {
+    const taskList = localStorage.getItem('taskList')
+    const order = localStorage.getItem('order')
+  
+    if (taskList) {
+      this.setState({ taskList: JSON.parse(taskList), order: JSON.parse(order) })
+    }
+  }
+  
+  // atualizar dados do local storage
+  componentDidUpdate() {
+    const { taskList, order } = this.state;
+    const taskListStorage = localStorage.getItem('taskList')
+    const orderStorage = localStorage.getItem('order')
+  
+    // se dados do local storage forem difrente dos dados do state, então atualizar
+    if (taskListStorage !== taskList || orderStorage !== order) {
+      localStorage.setItem('taskList', JSON.stringify(taskList))
+      localStorage.setItem('order', JSON.stringify(order))
+    }
   }
 
   handleChangeNewTask = e => {
     this.setState({
       task: e.target.value
     })
+    // remover cor vermelho do aviso
     let alert = document.querySelector('#alert')
     let input = document.querySelector('.createTaskInput')
     alert.innerHTML = ''
@@ -61,8 +56,8 @@ export default class Main extends Component {
         }),
         task: ''
       })
-      this.updateLocalStorage()
     } else {
+      // aviso caso tente enviar a tarefa com espaços
       let alert = document.querySelector('#alert')
       let input = document.querySelector('.createTaskInput')
       alert.innerHTML = 'Você não pode criar tarefas vazias.'
@@ -111,7 +106,7 @@ export default class Main extends Component {
     })
   }
 
-  filtrarTodas = () => {
+  handleClickFilterAll = () => {
     this.state.taskList.forEach(item => {
       document.getElementById(item.id).style.display = 'flex'
     })
@@ -134,7 +129,6 @@ export default class Main extends Component {
     this.setState({
       taskList: this.state.taskList.filter(item => !item.completed)
     })
-    this.updateLocalStorage()
   }
 
   handleChangeEditValue = e => {
@@ -155,7 +149,6 @@ export default class Main extends Component {
       this.setState({edit: ''})
       this.handleClickCloseModal(index)
     }
-    this.updateLocalStorage()
   }
 
   handleClickOpenModal = (id, index) => {
@@ -229,7 +222,7 @@ export default class Main extends Component {
     let select = document.querySelector('#filterList');
 	  let value = select.options[select.selectedIndex].value;
     if (value === '0'){
-      this.filtrarTodas()
+      this.handleClickFilterAll()
     } else if (value === '1') {
       this.handleClickFilterCompleted()
     } else if (value === '2') {
@@ -239,7 +232,7 @@ export default class Main extends Component {
 
   render = () => {
     return (
-      <S.Container onMouseOver={() => {this.updateLocalStorage()}}>
+      <S.Container>
         <S.FormAddTask onSubmit={e => {e.preventDefault(e)}}>
           <input
             value={this.state.task}
@@ -278,12 +271,12 @@ export default class Main extends Component {
               className="fa-solid fa-trash-check clearAll"
               title='Apagar todas as tarefas feitas'
             ></S.DeleteBtn>
-          <S.ChangeOrder 
-            onClick={() => {this.handleClickChangeOrder()}}
-            className={this.state.order === 'column' ? 'fa-regular fa-arrow-down reverse' : 'fa-regular fa-arrow-down'}
-            title='Inverter ordem das tarefas'
+            <S.ChangeOrder 
+              onClick={() => {this.handleClickChangeOrder()}}
+              className={this.state.order === 'column' ? 'fa-regular fa-arrow-down reverse' : 'fa-regular fa-arrow-down'}
+              title='Inverter ordem das tarefas'
             ></S.ChangeOrder>
-            </S.DeleteOrderContainer>
+          </S.DeleteOrderContainer>
         </S.ToDoFilterContainer>
         
         <S.TaskList
@@ -295,14 +288,14 @@ export default class Main extends Component {
               key={index}
               indexValue={index}
               id={item.id}
+              task={item.task}
+              completed={item.completed}
               draggableOnOff={this.state.draggable}
               dragdrop={e => {this.handleChangeDrop(e, item.id)}}
               dragstart={e => {this.handleChangeDragStarted(e, item.id)}}
               dragenter={e => {this.handleDragEntered(e)}}
               dragleave={e => {this.handleDragLeave(e)}}
-              completed={item.completed}
               handleClickCheck={() => {this.handleClickCheck(index, item, item.id)}}
-              task={item.task}
               openModal={() => {this.handleClickOpenModal(item.id, index)}}
               closeModal={() => {this.handleClickCloseModal(index)}}
               deleteTask={() => {this.handleClickDeleteTask(item.id)}}
