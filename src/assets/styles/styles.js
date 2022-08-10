@@ -173,7 +173,6 @@ export const ChangeOrder = styled.i`
 `
 
 export const TaskList = styled.div`
-  position: relative;
   display: flex;
   flex-direction: ${({ order }) => order || 'column'};
   gap: 15px;
@@ -205,7 +204,6 @@ const DeleteAnimation = keyframes`
 `
 
 export const TaskContainer = styled.div`
-  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
