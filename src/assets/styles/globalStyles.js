@@ -2,18 +2,18 @@ import { createGlobalStyle } from 'styled-components'
 
 export const GlobalStyle = createGlobalStyle`
   ::selection {
-  color: #fff;
-  background-color: #7f5af0;
-}
-::-webkit-scrollbar-track {
-  background-color: #2d2d2d;
-}
-::-webkit-scrollbar {
-  width: 5px;
-}
-::-webkit-scrollbar-thumb {
-  background: #7f5af0;
-}
+    color: #fff;
+    background-color: #7f5af0;
+  }
+  ::-webkit-scrollbar-track {
+    background-color: #2d2d2d;
+  }
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #7f5af0;
+  }
 
   * {
     margin: 0;
@@ -27,6 +27,7 @@ export const GlobalStyle = createGlobalStyle`
     position: relative;
     min-height: 100vh;
     background-color: #161722;
+    overflow-x: hidden;
   }
 
   * span,

@@ -26,7 +26,7 @@ export default class Main extends Component {
     const { taskList, order } = this.state;
   
     // se dados do state anterior forem difrentes dos dados do state atual, então atualizar localStorage
-    if (prevState.taskList !== taskList || prevState.order !== order) {
+    if (prevState !== taskList || prevState !== order) {
       localStorage.setItem('taskList', JSON.stringify(taskList))
       localStorage.setItem('order', JSON.stringify(order))
     }
@@ -70,9 +70,19 @@ export default class Main extends Component {
   }
 
   handleClickDeleteTask = id => {
-    this.setState(state => {
-      return {taskList: state.taskList.filter(item => item.id !== id)}
-    })
+    const task = document.getElementById(id)
+    task.classList.add('deleted')
+    
+    setTimeout(() => {
+      task.classList.remove('deleted')
+    }, 1005)
+
+    setTimeout(() => {
+      this.setState(state => {
+        return {taskList: state.taskList.filter(item => item.id !== id)}
+      })
+    }, 1000)
+
   }
 
   handleClickCheck = (index, item, id) => {
@@ -81,7 +91,7 @@ export default class Main extends Component {
     this.setState({
       taskList: taskList
     })
-    this.select()
+    this.handleChangeFilter()
   }
 
   handleClickFilterCompleted = () => {

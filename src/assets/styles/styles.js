@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
@@ -173,6 +173,7 @@ export const ChangeOrder = styled.i`
 `
 
 export const TaskList = styled.div`
+  position: relative;
   display: flex;
   flex-direction: ${({ order }) => order || 'column'};
   gap: 15px;
@@ -185,7 +186,26 @@ export const TaskList = styled.div`
   }
 `;
 
+const DeleteAnimation = keyframes`
+  0% {
+    left: 0;
+    opacity: 0.8;
+  }
+  25% {
+    transform: translateX(-150px);
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  100% {
+    transform: translateX(600px);
+    opacity: 0;
+  }
+`
+
 export const TaskContainer = styled.div`
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -196,6 +216,10 @@ export const TaskContainer = styled.div`
 
   &:hover .BtnContainer {
     opacity: 1;
+  }
+
+  .deleted& {
+    animation: ${DeleteAnimation} 1s ease-in forwards;
   }
 `;
 
@@ -229,16 +253,16 @@ export const Task = styled.span`
   
   &:after {
     right: 2.5px;
-    background: #ddd;
+    background: #cccc;
     transition: width 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
   }
 
   .checked& {
-    color: #ccc;
+    color: #cccc;
   }
 
   .checked&:before {
-    background: #ddd;
+    background: #cccc;
     width: 100%;
     transition: width 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
   }
