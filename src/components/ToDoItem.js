@@ -2,23 +2,12 @@ import React from 'react'
 import * as S from '../assets/styles/styles.js'
 
 export const ToDoItem = ({
-  indexValue,
-  id,
-  draggableOnOff,
-  dragdrop,
-  dragstart,
-  dragenter,
-  dragleave,
-  completed,
-  handleClickCheck,
-  task,
-  onsubmit,
-  openModal,
-  deleteTask,
-  closeModal,
-  editValue,
-  changeEditValue,
-  editInputValue
+  indexValue, id, draggableOnOff,
+  dragdrop, dragstart, dragenter,
+  dragleave, completed, handleClickCheck,
+  task, onsubmit, openModal,
+  deleteTask, closeModal, editValue,
+  changeEditValue, editInputValue
 }) => {
   return (
     <S.TaskContainer
@@ -28,6 +17,7 @@ export const ToDoItem = ({
       onDragStart={dragstart}
       onDragEnter={dragenter}
       onDragLeave={dragleave}
+      title='Clique e segure para arrastar tarefa.'
     >
       <S.TaskBox>
         <S.CheckIcon 
@@ -40,8 +30,8 @@ export const ToDoItem = ({
       </S.TaskBox>
 
       <S.BtnContainer className='BtnContainer'>
-        <S.EditBtn onClick={openModal} className="fa-solid fa-pen" title='Editar tarefa'></S.EditBtn>
-        <S.DeleteBtn onClick={deleteTask} className="fa-solid fa-xmark-large" title='Apagar tarefa'></S.DeleteBtn>
+        <S.EditBtn onClick={openModal} className='fa-solid fa-pen' title='Editar tarefa'></S.EditBtn>
+        <S.DeleteBtn onClick={deleteTask} className='fa-solid fa-xmark-large' title='Apagar tarefa'></S.DeleteBtn>
       </S.BtnContainer>
 
       <S.EditTaskModal
@@ -52,6 +42,7 @@ export const ToDoItem = ({
           <S.EditInput
             onChange={changeEditValue}
             value={editInputValue}
+            placeholder='Editar tarefa...'
           />
           <S.ContainerBtn>
             <S.CancelConfirmEdit type='button' onClick={closeModal}>CANCELAR</S.CancelConfirmEdit>

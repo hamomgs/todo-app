@@ -44,7 +44,7 @@ export const FormAddTask = styled.form`
     height: 40px;
     border: solid 2px #7f5af0;
     background-color: #161722;
-    font-size: 20px;
+    font-size: 18px;
     border-radius: 8px 0 0 8px;
     padding: 10px;
     color: #ccc;
@@ -77,6 +77,10 @@ export const AddIcon = styled.i`
   .createTaskBtn:hover & {
     transform: rotate(180deg);
     color: #fff;
+    
+    @media screen and (max-width: 650px) {
+      font-size: 14px;
+    }
   }
 `
 
@@ -86,6 +90,11 @@ export const AlertError = styled.p`
   left: 5px;
   color: #f00c;
   font-weight: 500;
+
+  @media screen and (max-width: 650px) {
+    font-size: 14px;
+    left: 30px;
+  }
 `
 
 export const ToDoFilterContainer = styled.div`
@@ -113,38 +122,47 @@ export const ShowContainer = styled.div`
   &:after {
     content: '<>';
     position: absolute;
-    font: 14px "Consolas", monospace;
+    right: 11px;
+    top: 10px;
+    font-size: 14px;
     color: #fffc;
     -webkit-transform: rotate(90deg);
     -moz-transform: rotate(90deg);
     -ms-transform: rotate(90deg);
     transform: rotate(90deg);
-    right: 11px;
-    top: 10px;
-    padding: 0 0 2px;
     border-bottom: 1px solid #999;
   }
 
   select {
-    display: block;
-    cursor: pointer;
-    outline: none;
     width: 100%;
     max-width: 320px;
     height: 30px;
+    cursor: pointer;
+    outline: none;
     margin: 5px 0px;
     padding: 0px 15px;
     font-size: 14px;
     font-weight: 500;
     color: #fffc;
     border: none;
-    border-radius: 8px;
+    border-radius: 4px 4px 0 0;
     -ms-word-break: normal;
     word-break: normal;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    background-color: #7f5af0;
+    background-color: #7f5af0cc;
+    
+    option {
+      background: #7f5af0;
+      @media screen and (max-width: 650px) {
+        font-size: 10px;
+      }
+    }
+
+    option[value="none"] {
+      background: #c6abf9;
+    }
   }
 `
 
@@ -362,7 +380,7 @@ export const EditInput = styled.input`
   border: solid 2px #7f5af0;
   border-radius: 5px;
   color: #ccc;
-  font-size: 20px;
+  font-size: 18px;
   padding: 10px;
   background-color: transparent;
 `;
@@ -470,6 +488,9 @@ export const Footer = styled.footer`
     color: #ccc;
     font-weight: 500;
     text-align: center;
+    @media screen and (max-width: 650px) {
+      font-size: 14px;
+    }
 
     a {
       color: #7f5af0;

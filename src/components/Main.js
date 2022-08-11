@@ -176,11 +176,11 @@ export default class Main extends Component {
   // drag start
   handleChangeDragStarted = (e, idItem) => {
     e.stopPropagation()
-
+    
     // definir id como id da task
     e.dataTransfer.setData('id', idItem)
   }
-
+  
   // drag over
   handleChangeDragging = e => {
     e.preventDefault()
@@ -192,7 +192,7 @@ export default class Main extends Component {
     e.preventDefault()
     e.stopPropagation()
 
-    // pegar o id da task que vai ser a "dropzone"
+    // pegar o id da task que vai ser a 'dropzone'
     let currentId = idItem
     // pegar id da task que esta sendo arrastada
     let id = Number(e.dataTransfer.getData('id'))
@@ -225,9 +225,8 @@ export default class Main extends Component {
     e.target.classList.remove('over');
   }
 
-
   handleChangeFilter = () => {
-    let select = document.querySelector('#filterList');
+    const select = document.querySelector('#filterList');
 	  let value = select.options[select.selectedIndex].value;
     if (value === '0'){
       this.handleClickFilterAll()
@@ -246,6 +245,7 @@ export default class Main extends Component {
             value={this.state.task}
             onChange={e => {this.handleChangeNewTask(e)}}
             className='createTaskInput'
+            placeholder='Criar nova tarefa...'
             autoFocus
           />
           
@@ -254,29 +254,33 @@ export default class Main extends Component {
             className='createTaskBtn'
             title='Criar nova tarefa'
           >
-            Criar <S.AddIcon className="fa-regular fa-plus"></S.AddIcon>
+            Criar <S.AddIcon className='fa-regular fa-plus'></S.AddIcon>
           </button>
           <S.AlertError id='alert'></S.AlertError>
         </S.FormAddTask>
 
         <S.ToDoFilterContainer>
-            <S.ShowContainer>
-              <select defaultValue="none" id="filterList" onChange={() => {this.handleChangeFilter()}}>
-                <option value="none" disabled>Filtrar tarefas</option>
-                <option value="0">Todas</option>
-                <option value="1">Concluídas</option>
-                <option value="2">Não concluídas</option>
-              </select>
-            </S.ShowContainer>
+          <S.ShowContainer>
+            <select 
+              defaultValue='none' 
+              id='filterList'
+              onChange={() => {this.handleChangeFilter()}}
+            >
+              <option value='none' disabled>Filtrar tarefas</option>
+              <option value='0'>Todas</option>
+              <option value='1'>Concluídas</option>
+              <option value='2'>Não concluídas</option>
+            </select>
+          </S.ShowContainer>
           <S.DeleteOrderContainer>
             <S.DeleteBtn
               onClick={() => {this.handleClickClearAll()}}
-              className="fa-solid fa-trash clearAll"
+              className='fa-solid fa-trash clearAll'
               title='Apagar todas as tarefas'
             ></S.DeleteBtn>
             <S.DeleteBtn
               onClick={() => {this.handleClickClearCompleted()}}
-              className="fa-solid fa-trash-check clearAll"
+              className='fa-solid fa-trash-check clearAll'
               title='Apagar todas as tarefas feitas'
             ></S.DeleteBtn>
             <S.ChangeOrder 
