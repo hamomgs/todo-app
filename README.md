@@ -61,6 +61,6 @@ $ npm start
 
 ## 📝 License
 
-This project is under the license [MIT](./LICENSE).
+This project is under the license [MIT](https://github.com/hamomgs/todo-app/blob/main/LICENCE).
 
 Coded with ❤ by Hamom Silva 👋🏽 [Get in Touch!](Https://www.linkedin.com/in/hamomgs/)
