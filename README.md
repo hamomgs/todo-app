@@ -58,6 +58,7 @@ $ npm start
 * [Google Fonts](https://fonts.google.com)
 * [Font Awesome](https://fontawesome.com)
 * [Real Favicon Generator](https://realfavicongenerator.net)
+* [Happy Hues](https://www.happyhues.co)
 
 ## 📝 License
 
